@@ -12,9 +12,8 @@
     .area {
       margin: auto;
       width: 100%; /* Adjust to take full width on smaller screens */
-      max-width: 400px; /* Adjust max-width as per your design */
-      height: calc(100vw - 100px); /* Adjust height based on aspect ratio or requirement */
-      max-height: 600px; /* Set a maximum height if needed */
+      max-width: 800px; /* Set a maximum width for larger screens */
+      height: 600px;
       background-color: cadetblue;
       position: relative;
       border: 3px solid black;
@@ -22,12 +21,12 @@
     }
     #score,
     #speed {
-      margin: 10px;
+      margin: 20px;
       background-color: black;
       color: white;
-      height: 30px;
-      width: 80px;
-      font-size: 18px;
+      height: 50px;
+      width: 120px;
+      font-size: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -36,39 +35,52 @@
     }
 
     .part {
-      width: 10px; /* Adjust size based on smaller grid */
-      height: 10px; /* Adjust size based on smaller grid */
+      width: 20px; /* Default size for parts */
+      height: 20px; /* Default size for parts */
       background-color: green;
       position: absolute;
-      border: 2px solid black; /* Ensure visibility on smaller elements */
+      border: 5px;
     }
     .food {
-      width: 10px; /* Adjust size based on smaller grid */
-      height: 10px; /* Adjust size based on smaller grid */
+      width: 20px; /* Default size for food */
+      height: 20px; /* Default size for food */
       background-color: red;
       position: absolute;
-      top: 50px; /* Adjust position based on smaller grid */
-      left: 50px; /* Adjust position based on smaller grid */
+      top: 100px; /* Default position for food */
+      left: 100px; /* Default position for food */
     }
     #buttons {
       text-align: center;
     }
     .button {
-      height: 30px;
-      width: 60px;
+      height: 50px;
+      width: 100px;
       margin: 5px;
-      font-size: 14px;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 600px) {
+      .area {
+        width: 100%; /* Full width for small screens */
+        max-width: none; /* No max width for small screens */
+        height: 400px; /* Adjust height as needed */
+      }
+      .part, .food {
+        width: 10px; /* Adjust size for smaller screens */
+        height: 10px; /* Adjust size for smaller screens */
+      }
     }
   </style>
 </head>
 <body onkeydown="handleKeydown(event)">
-    <div id="one">
+  <div id="one">
     <div id="score"></div>
-    <div id="speed"></div></div>
-    <div class="area" id="area">
-      <div class="food" id="food"></div>
-      <div id="body"></div>
-    </div>
+    <div id="speed"></div>
+  </div>
+  <div class="area" id="area">
+    <div class="food" id="food"></div>
+    <div id="body"></div>
+  </div>
   <div id="buttons">
     <button class="button" onclick="changeDirection('up')">UP</button><br />
     <button class="button" onclick="changeDirection('left')">LEFT</button>
@@ -76,19 +88,26 @@
     <button class="button" onclick="changeDirection('right')">RIGHT</button>
   </div>
   <script>
-    const scale = 10; // Adjust scale for smaller grid
+    let areaWidth; // Variable to hold the current areaWidth
+    const scale = 20; // Scale for rendering
+
+    // Detect viewport width and set areaWidth accordingly
+    if (window.innerWidth <= 600) {
+      areaWidth = 20; // Set areaWidth to 20 for smaller screens
+    } else {
+      areaWidth = 40; // Set areaWidth to 40 for larger screens
+    }
 
     const area = document.getElementById("area");
     const foodEl = document.getElementById("food");
 
-    const areaWidth = 20; // Adjusted for smaller width
-    const areaHeight = 16; // Adjust as per your aspect ratio
+    const areaHeight = 16; // Fixed height
 
-    let positionX = 5;
-    let positionY = 5;
+    let positionX = 5; // Initial X position
+    let positionY = 5; // Initial Y position
 
-    let score = 0;
-    let speed = 150;
+    let score = 0; // Initial score
+    let speed = 150; // Initial speed
 
     let bodyCoordinates = [
       { x: 7, y: 5 },
@@ -97,16 +116,16 @@
       { x: 10, y: 5 },
     ];
 
-    const food = { x: 5, y: 5 };
-    let direction = "up";
+    const food = { x: 5, y: 5 }; // Initial food position
+    let direction = "up"; // Initial direction
 
     function resetGame() {
       score = 0;
       speed = 150;
       document.getElementById("score").innerText = "Score: " + score;
       document.getElementById("speed").innerText = "Speed: " + speed;
-      area.style.width = `${areaWidth * scale}px`;
-      area.style.height = `${areaHeight * scale}px`;
+      area.style.width = `${areaWidth * scale}px`; // Set width based on areaWidth and scale
+      area.style.height = `${areaHeight * scale}px`; // Set height based on areaHeight and scale
       bodyCoordinates = [
         { x: 7, y: 5 },
         { x: 8, y: 5 },
