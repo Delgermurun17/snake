@@ -11,8 +11,10 @@
     }
     .area {
       margin: auto;
-      width: 800px;
-      height: 600px;
+      width: 100%; /* Adjust to take full width on smaller screens */
+      max-width: 400px; /* Adjust max-width as per your design */
+      height: calc(100vw - 100px); /* Adjust height based on aspect ratio or requirement */
+      max-height: 600px; /* Set a maximum height if needed */
       background-color: cadetblue;
       position: relative;
       border: 3px solid black;
@@ -20,12 +22,12 @@
     }
     #score,
     #speed {
-      margin: 20px;
+      margin: 10px;
       background-color: black;
       color: white;
-      height: 50px;
-      width: 120px;
-      font-size: 25px;
+      height: 30px;
+      width: 80px;
+      font-size: 18px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,27 +36,28 @@
     }
 
     .part {
-      width: 20px;
-      height: 20px;
+      width: 10px; /* Adjust size based on smaller grid */
+      height: 10px; /* Adjust size based on smaller grid */
       background-color: green;
       position: absolute;
-      border: 5px;
+      border: 2px solid black; /* Ensure visibility on smaller elements */
     }
     .food {
-      width: 20px;
-      height: 20px;
+      width: 10px; /* Adjust size based on smaller grid */
+      height: 10px; /* Adjust size based on smaller grid */
       background-color: red;
       position: absolute;
-      top: 100px;
-      left: 100px;
+      top: 50px; /* Adjust position based on smaller grid */
+      left: 50px; /* Adjust position based on smaller grid */
     }
     #buttons {
       text-align: center;
     }
     .button {
-      height: 50px;
-      width: 100px;
+      height: 30px;
+      width: 60px;
       margin: 5px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -73,13 +76,13 @@
     <button class="button" onclick="changeDirection('right')">RIGHT</button>
   </div>
   <script>
-    const scale = 20;
+    const scale = 10; // Adjust scale for smaller grid
 
     const area = document.getElementById("area");
     const foodEl = document.getElementById("food");
 
-    const areaWidth = 40;
-    const areaHeight = 16;
+    const areaWidth = 20; // Adjusted for smaller width
+    const areaHeight = 16; // Adjust as per your aspect ratio
 
     let positionX = 5;
     let positionY = 5;
