@@ -11,8 +11,7 @@
     }
     .area {
       margin: auto;
-      width: 100%; /* Adjust to take full width on smaller screens */
-      max-width: 800px; /* Set a maximum width for larger screens */
+      width: 800px;
       height: 600px;
       background-color: cadetblue;
       position: relative;
@@ -35,19 +34,19 @@
     }
 
     .part {
-      width: 20px; /* Default size for parts */
-      height: 20px; /* Default size for parts */
+      width: 20px;
+      height: 20px;
       background-color: green;
       position: absolute;
       border: 5px;
     }
     .food {
-      width: 20px; /* Default size for food */
-      height: 20px; /* Default size for food */
+      width: 20px;
+      height: 20px;
       background-color: red;
       position: absolute;
-      top: 100px; /* Default position for food */
-      left: 100px; /* Default position for food */
+      top: 100px;
+      left: 100px;
     }
     #buttons {
       text-align: center;
@@ -57,30 +56,16 @@
       width: 100px;
       margin: 5px;
     }
-
-    /* Media query for smaller screens */
-    @media (max-width: 600px) {
-      .area {
-        width: 100%; /* Full width for small screens */
-        max-width: none; /* No max width for small screens */
-        height: 400px; /* Adjust height as needed */
-      }
-      .part, .food {
-        width: 10px; /* Adjust size for smaller screens */
-        height: 10px; /* Adjust size for smaller screens */
-      }
-    }
   </style>
 </head>
 <body onkeydown="handleKeydown(event)">
-  <div id="one">
+    <div id="one">
     <div id="score"></div>
-    <div id="speed"></div>
-  </div>
-  <div class="area" id="area">
-    <div class="food" id="food"></div>
-    <div id="body"></div>
-  </div>
+    <div id="speed"></div></div>
+    <div class="area" id="area">
+      <div class="food" id="food"></div>
+      <div id="body"></div>
+    </div>
   <div id="buttons">
     <button class="button" onclick="changeDirection('up')">UP</button><br />
     <button class="button" onclick="changeDirection('left')">LEFT</button>
@@ -88,26 +73,19 @@
     <button class="button" onclick="changeDirection('right')">RIGHT</button>
   </div>
   <script>
-    let areaWidth; // Variable to hold the current areaWidth
-    const scale = 20; // Scale for rendering
-
-    // Detect viewport width and set areaWidth accordingly
-    if (window.innerWidth <= 600) {
-      areaWidth = 20; // Set areaWidth to 20 for smaller screens
-    } else {
-      areaWidth = 40; // Set areaWidth to 40 for larger screens
-    }
+    const scale = 20;
 
     const area = document.getElementById("area");
     const foodEl = document.getElementById("food");
 
-    const areaHeight = 16; // Fixed height
+    const areaWidth = 20;
+    const areaHeight = 16;
 
-    let positionX = 5; // Initial X position
-    let positionY = 5; // Initial Y position
+    let positionX = 5;
+    let positionY = 5;
 
-    let score = 0; // Initial score
-    let speed = 150; // Initial speed
+    let score = 0;
+    let speed = 150;
 
     let bodyCoordinates = [
       { x: 7, y: 5 },
@@ -116,16 +94,16 @@
       { x: 10, y: 5 },
     ];
 
-    const food = { x: 5, y: 5 }; // Initial food position
-    let direction = "up"; // Initial direction
+    const food = { x: 5, y: 5 };
+    let direction = "up";
 
     function resetGame() {
       score = 0;
       speed = 150;
       document.getElementById("score").innerText = "Score: " + score;
       document.getElementById("speed").innerText = "Speed: " + speed;
-      area.style.width = `${areaWidth * scale}px`; // Set width based on areaWidth and scale
-      area.style.height = `${areaHeight * scale}px`; // Set height based on areaHeight and scale
+      area.style.width = `${areaWidth * scale}px`;
+      area.style.height = `${areaHeight * scale}px`;
       bodyCoordinates = [
         { x: 7, y: 5 },
         { x: 8, y: 5 },
